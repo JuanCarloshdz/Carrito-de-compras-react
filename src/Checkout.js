@@ -8,8 +8,9 @@ import Subtotal from './Subtotal';
 
 function Checkout() {
 
-    const [{basket} , dispatch]  = useStateValue();
+    const [{basket, user} , dispatch]  = useStateValue();
 
+    console.log(user?.email? user.email :'po' )
     return (
         <div className="checkout"  >
             <div className="checkout__left " >
@@ -18,6 +19,7 @@ function Checkout() {
                     src="https://images-na.ssl-images-amazon.com/images/G/02/UK_CCMP/TM/OCC_Amazon1._CB423492668_.jpg" 
                     alt="" />
                     <div className="checkout__tittle" >
+                        <h3> {user?.email? 'Hello, ' + user.email :''}</h3>
                         <h2>
                             Your shopping basket
                         </h2>

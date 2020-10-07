@@ -5,18 +5,27 @@ import { ShoppingBasket } from '@material-ui/icons'
 
 import { Link } from 'react-router-dom'
 import { useStateValue } from './StateProvider';
+import { auth } from './firebase';
 
 //  https://9to5mac.com/wp-content/uploads/sites/6/2019/01/Amazon-Logo.jpg
 function Header() {
 
-    const [{ basket }, dispatch] = useStateValue();
+    const [{ basket , user}, dispatch] = useStateValue();
 
+    const handleAutentification = () => {
+        if( user ){
+            auth.signOut();
+        }else{
+
+        }
+    }
     console.log(basket)
+
 
     return (
         <div className="header">
 
-            <Link to="/" >
+            <Link to={!user && "/login"} >
                 <img
                     className="header__logo"
                     src="https://raw.githubusercontent.com/JuanCarloshdz/imagenes/main/icono.png"
@@ -36,13 +45,13 @@ function Header() {
             <div className="header__nav">
 
                 <Link to="/login">
-                    <div className="header__option" >
+                    <div className="header__option" onClick={handleAutentification}>
                         <span className="header_optionLineOne">
                             Hello Guest
                     </span>
 
                         <span className="header__optionLineTwo">
-                            Sign In
+                           {user? 'Sign Out': 'Sign In'}
                     </span>
                     </div>
                 </Link>
